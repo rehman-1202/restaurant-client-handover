@@ -1,0 +1,143 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system definition.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root and .dark blocks define the actual color values using oklch.
+ * All colors MUST use oklch format.
+ *
+ * To add a new semantic color:
+ * 1. Add the variable to :root (light value) and .dark (dark value)
+ * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-foreground: var(--whatsapp-foreground);
+  --font-display: "Cormorant Garamond", serif;
+  --font-sans: "Karla", sans-serif;
+}
+
+:root {
+  --radius: 0.5rem;
+  --background: oklch(0.17 0.012 40);
+  --foreground: oklch(0.94 0.02 80);
+  --card: oklch(0.21 0.015 40);
+  --card-foreground: oklch(0.94 0.02 80);
+  --popover: oklch(0.21 0.015 40);
+  --popover-foreground: oklch(0.94 0.02 80);
+  --primary: oklch(0.78 0.13 75);
+  --primary-foreground: oklch(0.17 0.012 40);
+  --secondary: oklch(0.38 0.12 25);
+  --secondary-foreground: oklch(0.94 0.02 80);
+  --muted: oklch(0.25 0.015 40);
+  --muted-foreground: oklch(0.72 0.02 70);
+  --accent: oklch(0.38 0.12 25);
+  --accent-foreground: oklch(0.94 0.02 80);
+  --destructive: oklch(0.6 0.2 27);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.32 0.02 50);
+  --input: oklch(0.32 0.02 50);
+  --ring: oklch(0.78 0.13 75);
+  --whatsapp: oklch(0.72 0.17 150);
+  --whatsapp-foreground: oklch(0.99 0 0);
+  --chart-1: oklch(0.78 0.13 75); --chart-2: oklch(0.38 0.12 25); --chart-3: oklch(0.6 0.1 60); --chart-4: oklch(0.5 0.1 40); --chart-5: oklch(0.7 0.1 90);
+  --sidebar: oklch(0.21 0.015 40); --sidebar-foreground: oklch(0.94 0.02 80); --sidebar-primary: oklch(0.78 0.13 75); --sidebar-primary-foreground: oklch(0.17 0.012 40); --sidebar-accent: oklch(0.25 0.015 40); --sidebar-accent-foreground: oklch(0.94 0.02 80); --sidebar-border: oklch(0.32 0.02 50); --sidebar-ring: oklch(0.78 0.13 75);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+}
+
+@layer base {
+  body { font-family: var(--font-sans); }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 500; }
+}
+
+@utility eyebrow {
+  font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--primary);
+}
+@utility ornament {
+  width: 5rem; height: 1px; background: linear-gradient(90deg, transparent, var(--primary), transparent);
+}
+@utility nav-link {
+  font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted-foreground); transition: color .2s;
+  &:hover { color: var(--primary); }
+}
+@utility hero-overlay {
+  background: linear-gradient(90deg, color-mix(in oklab, var(--background) 92%, transparent) 0%, color-mix(in oklab, var(--background) 55%, transparent) 60%, color-mix(in oklab, var(--background) 30%, transparent) 100%);
+}
+@utility btn-primary {
+  display: inline-flex; align-items: center; padding: 0.9rem 2rem; border-radius: var(--radius); background: var(--primary); color: var(--primary-foreground);
+  font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; transition: filter .2s;
+  &:hover { filter: brightness(1.1); }
+}
+@utility btn-outline {
+  display: inline-flex; align-items: center; padding: 0.9rem 2rem; border-radius: var(--radius); border: 1px solid var(--primary); color: var(--primary);
+  font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; transition: all .2s;
+  &:hover { background: var(--primary); color: var(--primary-foreground); }
+}
+@utility whatsapp-fab {
+  position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 50; display: inline-flex; align-items: center; gap: .5rem;
+  padding: .9rem 1.1rem; border-radius: 9999px; background: var(--whatsapp); color: var(--whatsapp-foreground); font-weight: 600;
+  box-shadow: 0 10px 30px -8px color-mix(in oklab, var(--whatsapp) 60%, transparent); transition: transform .2s;
+  &:hover { transform: translateY(-2px); }
+}
